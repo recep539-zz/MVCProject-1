@@ -1,0 +1,47 @@
+﻿@model AdvancedRepository.Models.ViewModels.FatMasterModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4>@Model.Title</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" hidden>
+                <label asp-for="FatMasters.Id" class="control-label"></label>
+                <input asp-for="FatMasters.Id" class="form-control" />
+                <span asp-validation-for="FatMasters.Id" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="FatDetail.Id" class="control-label"></label>
+                <input asp-for="FatDetail.Id" class="form-control" />
+                <span asp-validation-for="FatDetail.Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FatMasters.Date" class="control-label"></label>
+                <input asp-for="FatMasters.Date" class="form-control" />
+                <span asp-validation-for="FatMasters.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Customer Name</label>
+                <select asp-for="FatMasters.CustomerId" class="form-control">
+                    @foreach (var item in Model.CustomerList)
+                    {
+                        <option value="@item.Id">@item.CompanyName</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Model.BtnVal" class="@Model.BtnClass" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-dark" asp-action="List">Back to List</a>
+</div>
+

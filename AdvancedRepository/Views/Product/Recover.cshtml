@@ -1,0 +1,65 @@
+﻿@model IEnumerable<AdvancedRepository.DTOs.ProductList>
+
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #resim{
+        height:200px;width:200px;
+    }
+    </style>
+<h1>Recover Products List</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Product Image
+            </th>
+            <th>
+                Company Name
+            </th>
+            <th>
+                Category Name
+            </th>
+            <th>
+                Unit Name
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Id
+                </td>
+                <td>
+                    @item.ProductName
+                </td>
+                <td id="resim">
+                    <img src="@item.ProductImage" alt="Image" />
+                </td>
+
+                <td>
+                    @item.CompanyName
+                </td>
+                <td>
+                    @item.CategoryName
+                </td>
+                <td>
+                    @item.UnitName
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a class="btn btn-secondary" asp-action="List">Back to List</a>
+</div>

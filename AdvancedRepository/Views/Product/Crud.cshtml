@@ -1,0 +1,122 @@
+﻿@model AdvancedRepository.Models.ViewModels.ProductModel
+
+@{
+    ViewData["Title"] = "CrUD";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@Model.Title</h1>
+
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group" hidden>
+                <input asp-for="Product.Id" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Product.ProductName" class="control-label">Product Name</label>
+                <input asp-for="Product.ProductName" class="form-control" />
+                <span asp-validation-for="Product.ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.ProductImage" class="control-label">Product Image</label>
+                <input asp-for="Product.ProductImage" class="form-control" />
+                <span asp-validation-for="Product.ProductImage" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Product.Supplier.CompanyName" class="control-label">Supplier Name</label>
+                <select name="Product.SupplierId" class="form-control">
+                    @foreach (var item in Model.SupplierList)
+                    {
+
+                        if (item.SupplierId == Model.Product.SupplierId)
+                        {
+                            <option selected style="color:red" name="Product.SupplierId" value="@item.SupplierId">@item.CompanyName</option>
+                        }
+                        else
+                        {
+                            <option name="Product.SupplierId" value="@item.SupplierId">@item.CompanyName</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Product.Employees.FirstName" class="control-label">Employee Name</label>
+                <select name="Product.EmployeeId" class="form-control">
+                    @foreach (var item in Model.EmployeeList)
+                    {
+
+                        if (item.Id == Model.Product.EmployeeId)
+                        {
+                            <option selected style="color:red" name="Product.EmployeeId" value="@item.Id">@item.FullName</option>
+                        }
+                        else
+                        {
+                            <option name="Product.EmployeeId" value="@item.Id">@item.FullName</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Product.Category.CategoryName" class="control-label">Category Name</label>
+                <select name="Product.CategoryId" class="form-control">
+                    @foreach (var item in Model.CategoryList)
+                    {
+
+                        if (item.CategoryId == Model.Product.CategoryId)
+                        {
+                            <option selected style="color:red" name="Product.CategoryId" value="@item.CategoryId">@item.CategoryName</option>
+                        }
+                        else
+                        {
+                            <option name="Product.CategoryId" value="@item.CategoryId">@item.CategoryName</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Product.Unit.UnitName" class="control-label">Unit Name</label>
+                <select name="Product.UnitId" class="form-control">
+                    @foreach (var item in Model.UnitList)
+                    {
+
+                        if (item.UnitId == Model.Product.UnitId)
+                        {
+                            <option selected style="color:red" name="Product.UnitId" value="@item.UnitId">@item.UnitName</option>
+                        }
+                        else
+                        {
+                            <option name="Product.UnitId" value="@item.UnitId">@item.UnitName</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.UnitPrice" class="control-label">Unit Price</label>
+                <input asp-for="Product.UnitPrice" class="form-control" />
+                <span asp-validation-for="Product.UnitPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Model.BtnVal" class="@Model.BtnClass" />
+            </div>
+
+            <div class="form-group">
+                <a class="btn btn-warning" href="/Product/List">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

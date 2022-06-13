@@ -1,0 +1,19 @@
+﻿@model AdvancedRepository.Models.Classes.FatDetail
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>FatDetail</h4>
+    <hr /> 
+    <form asp-action="Delete">
+        <div class="form-group">
+            <label>FatDetailId</label>
+            <input readonly class="form-control" asp-for="Id" />
+        </div>
+        <div class="form-group">
+            <label>ProductId</label>
+            <input readonly class="form-control"  asp-for="ProductId" />
+        </div>
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a class="btn btn-dark" asp-action="List">Back to List</a>
+    </form>
+</div>

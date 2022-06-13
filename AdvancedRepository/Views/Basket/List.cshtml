@@ -1,0 +1,36 @@
+﻿@model IEnumerable<AdvancedRepository.DTOs.BasketList>
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-5">
+        <h1>Add Products</h1>   
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Urun Ad</td>
+                    <td>Miktar</td>
+                    <td>Birim Fiyat</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.ProductName</td>
+                        <td>@item.Amount</td>
+                        <td>@item.UnitPrice</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div>
+    <a class="btn btn-primary" href="/Basket/Add">Add Products</a>
+</div>
+
+

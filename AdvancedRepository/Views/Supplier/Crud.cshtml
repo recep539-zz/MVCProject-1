@@ -1,0 +1,100 @@
+﻿@model AdvancedRepository.Models.ViewModels.SupplierModel
+
+@{
+    ViewData["Title"] = "CrUD";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@Model.Title</h1>
+
+<h4>Suppliers</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group" hidden>
+                <input asp-for="Supplier.Id" class="form-control"/>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Supplier.CompanyName" class="control-label">Company Name</label>
+                <input asp-for="Supplier.CompanyName" class="form-control" />
+                <span asp-validation-for="Supplier.CompanyName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Supplier.Producer" /> Is there producer?
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Supplier.Street" class="control-label">Street</label>
+                <input asp-for="Supplier.Street" class="form-control" />
+                <span asp-validation-for="Supplier.Street" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Supplier.Avenue" class="control-label">Avenue</label>
+                <input asp-for="Supplier.Avenue" class="form-control" />
+                <span asp-validation-for="Supplier.Avenue" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Supplier.OutDoorNumber" class="control-label">Outdoor Number</label>
+                <input asp-for="Supplier.OutDoorNumber" class="form-control" />
+                <span asp-validation-for="Supplier.OutDoorNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Supplier.County.CountyName" class="control-label">County</label>
+                <select name="Supplier.CountyId" class="form-control">
+                    @foreach (var item in Model.CountyList)
+                    {
+                        if (item.CountyId == Model.Supplier.CountyId)
+                        {
+                            <option selected style="color:red" name="Supplier.CountyId" value="@item.CountyId">@item.CountyName</option>
+                        }
+                        else
+                        {
+                            <option name="Supplier.CountyId" value="@item.CountyId">@item.CountyName</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Supplier.TaxNumber" class="control-label">Tax Number</label>
+                <input asp-for="Supplier.TaxNumber" class="form-control" />
+                <span asp-validation-for="Supplier.TaxNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Supplier.ContactName" class="control-label">Contact Name</label>
+                <input asp-for="Supplier.ContactName" class="form-control" />
+                <span asp-validation-for="Supplier.ContactName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Supplier.PhoneNumber" class="control-label">Phone Number</label>
+                <input asp-for="Supplier.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Supplier.PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="@Model.BtnVal" class="@Model.BtnClass" />
+            </div>
+
+            <div class="form-group">
+                <a class="btn btn-warning" href="/Supplier/List">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
